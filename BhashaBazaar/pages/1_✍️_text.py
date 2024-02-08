@@ -1,11 +1,11 @@
 import streamlit as st  
 from googletrans import Translator
-def translate_text(text, target_lang):
+def translateText(text, targetLang):
     translator = Translator()
     if isinstance(text,bytes):
-        input_text = text.decode('utf-8')
-    detected_lang = translator.detect(text).lang
-    translation= translator.translate(text, src=detected_lang,dest=target_lang)
+        inputText = text.decode('utf-8')
+    detectedLang = translator.detect(text).lang
+    translation= translator.translate(text, src=detectedLang,dest=targetLang)
     return translation.text
 
 def main():
@@ -29,13 +29,13 @@ def main():
         "Telugu": "te",
         # Add more Indic languages as needed
     }
-    target_lang = st.selectbox("Select Target Language", languages)
+    targetLang = st.selectbox("Select Target Language", languages)
     text = st.text_area("Enter Text to Translate")
     if st.button("Translate"):
         if text:
-            translated_text = translate_text(text,target_lang)
+            translatedText = translateText(text,target_lang)
             st.write("Translated Text:")
-            st.write(translated_text)
+            st.write(translatedText)
         else:
             st.write("Please enter text to translate.")
 
