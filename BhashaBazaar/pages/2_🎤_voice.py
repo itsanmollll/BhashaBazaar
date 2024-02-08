@@ -1,11 +1,10 @@
-# import streamlit as st
-# st.title("Voice")
 import streamlit as st
 import wave 
 import pyaudio
 from google.oauth2 import service_account
 from google.cloud import speech_v1p1beta1 as speech
 
+@st.cache_data()
 def transcribe(audio):
     clientFile = '/Users/anmol/Desktop/Work/basicPractice/bhashabazaar-b14fbe10ecd5.json'
     credentials = service_account.Credentials.from_service_account_file(clientFile)
@@ -20,8 +19,7 @@ def transcribe(audio):
     response = client.recognize(config=config, audio=audio)
     return response.results[0].alternatives[0].transcript
 
-
-
+@st.cache_data()
 def recordAudio(filename, seconds=5):
     chunk = 1024
     sample_format = pyaudio.paInt16
@@ -44,7 +42,6 @@ def main():
     if st.button("Record Audio"):
         recordAudio("recorded_audio.wav")
         st.write("Recording finished. Click 'Transcribe' to convert speech to text.")
-
     if st.button("Transcribe"):
         audio = open("recorded_audio.wav", "rb").read()
         text = transcribe(audio)
