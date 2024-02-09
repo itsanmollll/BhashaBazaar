@@ -32,23 +32,28 @@ Follow these steps to set up BhashaBazaar on your local machine:
 
 1. **Clone the Repository:**
    ```bash
-   git clone <repository_url>
-   cd <repository_name>
+   git clone https://github.com/itsanmollll/BhashaBazaar.git
+   cd BhashaBazaar
    ```
 2. **Create a Virtual Environment:**
+   ### For Windows:
    ```bash
    python -m venv venv
    ```
-3. **Activate the Virtual Environment:**
+   ### For Linux/MacOS:
+   ```bash
+   virtualenv myenv
+   ```
+4. **Activate the Virtual Environment:**
    ### For Windows:
    ```bash
    venv\Scripts\activate
    ```
-   ### On Linux/MacOS:
+   ### For Linux/MacOS:
    ```bash
    source venv/bin/activate
    ```
-4. **Install Dependencies:**
+5. **Install Dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
