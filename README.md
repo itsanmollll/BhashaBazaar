@@ -26,22 +26,6 @@ BhashaBazaar is a language translation application designed to facilitate seamle
 
 # BhashaBazaar
 
-## How to Use:
-
-1. **Select Target Language:**
-   Choose the target language into which you want to translate the text. BhashaBazaar supports a variety of languages, so you can translate text into languages of your choice.
-
-2. **Enter Text to Translate:**
-   Input the text you want to translate into the designated text area. You can either type or paste the text you wish to translate.
-
-3. **Translate:**
-   Click on the "Translate" button to initiate the translation process. BhashaBazaar will quickly generate the translated text and display it on the screen.
-
-4. **Model-Based Translation (Optional):**
-   For users who require more precise and context-aware translations, BhashaBazaar offers a model-based translation feature. Enter the text in the designated text area, select the source and target languages, and click on the "Translate using Model" button to access this advanced translation functionality.
-
----
-
 ## How to Install:
 
 Follow these steps to set up BhashaBazaar on your local machine:
@@ -68,9 +52,22 @@ Follow these steps to set up BhashaBazaar on your local machine:
    ```bash
    pip install -r requirements.txt
    ```
-**Installation:**
 
-BhashaBazaar is a web-based application accessible through any modern web browser. There is no need for installation or setup; simply visit the BhashaBazaar website to start translating text instantly.
+---
+
+## How to Use:
+
+1. **Select Target Language:**
+   Choose the target language into which you want to translate the text. BhashaBazaar supports a variety of languages, so you can translate text into languages of your choice.
+
+2. **Enter Text to Translate:**
+   Input the text you want to translate into the designated text area. You can either type or paste the text you wish to translate.
+
+3. **Translate:**
+   Click on the "Translate" button to initiate the translation process. BhashaBazaar will quickly generate the translated text and display it on the screen.
+
+4. **Model-Based Translation (Optional):**
+   For users who require more precise and context-aware translations, BhashaBazaar offers a model-based translation feature. Enter the text in the designated text area, select the source and target languages, and click on the "Translate using Model" button to access this advanced translation functionality.
 
 ---
 
