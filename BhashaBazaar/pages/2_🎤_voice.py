@@ -6,7 +6,7 @@ from google.cloud import speech_v1p1beta1 as speech
 
 @st.cache_data()
 def transcribe(audio):
-    clientFile = '/Users/anmol/Desktop/Work/basicPractice/bhashabazaar-b14fbe10ecd5.json'
+    clientFile = '/Users/anmol/Desktop/Work/BhashaBazaar/bhashabazaar-b14fbe10ecd5.json'
     credentials = service_account.Credentials.from_service_account_file(clientFile)
     client = speech.SpeechClient(credentials=credentials)
     audio = speech.RecognitionAudio(content=audio)
