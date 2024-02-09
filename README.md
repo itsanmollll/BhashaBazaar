@@ -24,7 +24,9 @@ BhashaBazaar is a language translation application designed to facilitate seamle
 
 ---
 
-**How to Use:**
+# BhashaBazaar
+
+## How to Use:
 
 1. **Select Target Language:**
    Choose the target language into which you want to translate the text. BhashaBazaar supports a variety of languages, so you can translate text into languages of your choice.
@@ -40,6 +42,28 @@ BhashaBazaar is a language translation application designed to facilitate seamle
 
 ---
 
+## How to Install:
+
+Follow these steps to set up BhashaBazaar on your local machine:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone <repository_url>
+   cd <repository_name>
+   ```
+2. **Create a Virtual Environment:**
+   ```bash
+   python -m venv venv
+   ```
+3. **Activate the Virtual Environment:**
+   **On Windows:**
+   venv\Scripts\activate
+   **On Linux/MacOS:**
+   source venv/bin/activate
+4. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 **Installation:**
 
 BhashaBazaar is a web-based application accessible through any modern web browser. There is no need for installation or setup; simply visit the BhashaBazaar website to start translating text instantly.
