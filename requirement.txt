@@ -1,8 +1,9 @@
-pip install streamlit 
-pip install googletrans-py
-pip install --upgrade google-cloud-speech
-pip install git+https://github.com/huggingface/transformers.git -q
-pip install transformers -U -q
-pip install sentencepiece
-pip freeze | grep transformers
-pip install torch torchvision torchaudio
+streamlit 
+googletrans-py
+google-cloud-speech
+pyaudio
+transformers 
+sentencepiece
+torch 
+torchvision 
+torchaudio
