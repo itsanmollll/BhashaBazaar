@@ -56,10 +56,14 @@ Follow these steps to set up BhashaBazaar on your local machine:
    python -m venv venv
    ```
 3. **Activate the Virtual Environment:**
-   **On Windows:**
+   ### For Windows:
+   ```bash
    venv\Scripts\activate
-   **On Linux/MacOS:**
+   ```
+   ### On Linux/MacOS:
+   ```bash
    source venv/bin/activate
+   ```
 4. **Install Dependencies:**
    ```bash
    pip install -r requirements.txt
