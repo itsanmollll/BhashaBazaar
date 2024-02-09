@@ -23,7 +23,7 @@ html_code = """
     flex-direction: column;
     max-width: 1000px;
     margin: 0;
-   
+    padding: 0;
     font-size: 20px;
     letter-spacing: 1px;
     color: #001d3d;
