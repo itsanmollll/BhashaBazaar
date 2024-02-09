@@ -38,15 +38,36 @@ def recordAudio(filename, seconds=5):
         wf.writeframes(b"".join(frames))
 
 def main(): 
-    st.title("Voice")
-    if st.button("Record Audio"):
+    st.markdown(f"""
+            <style>
+                [class="main st-emotion-cache-uf99v8 ea3mdgi3"] {{
+                    backdrop-filter: blur(0px);
+                    background:linear-gradient(rgb(102 185 255 / 84%) 0px, rgb(255 141 207 / 53%)  100%);
+            
+            }}
+                [data-testid="stHeader"]{{
+                    background: rgba(0,0,0,0.3);
+                    backdrop-filter: blur(15px);
+                        color: white;
+                }}
+            </style>
+
+    """, unsafe_allow_html=True)
+        
+    st.title("Voice 🗣")
+    st.subheader("Record Your Voice and Transcribe it to Text")
+    st.markdown("This feature allows you to record your voice and transcribe it to text. Click 'Record Audio' to start recording and 'Transcribe' to convert speech to text.")
+    st.markdown("---")
+    if st.button("#### 🎙 \n #### Record Audio"):
         recordAudio("recorded_audio.wav")
-        st.write("Recording finished. Click 'Transcribe' to convert speech to text.")
+        st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
     if st.button("Transcribe"):
         audio = open("recorded_audio.wav", "rb").read()
         text = transcribe(audio)
-        st.write("Transcribed Text:")
-        st.write(text)
+
+        st.subheader("Transcribed Text 🖨")
+        st.text(' ')
+        st.markdown(f"**{text}**")
 
 
 if __name__ == '__main__':
