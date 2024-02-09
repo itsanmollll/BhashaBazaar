@@ -59,7 +59,7 @@ def main():
     target_language = st.selectbox("Select Target Language", ["en_XX","hi_IN","bn_IN","gu_IN","kn_IN","ml_IN","mr_IN","or_IN","pa_IN","ta_IN"])
     if st.button("Translate using Model"):
         if article_en:
-            translatedText = translateModel(article_en, target_language,source_language)
+            translatedText = translateModel(article_en, target_language)
             st.write("Translated Text:")
             st.write(translatedText)
         else:
