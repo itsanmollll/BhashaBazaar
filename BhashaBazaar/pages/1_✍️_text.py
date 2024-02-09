@@ -3,16 +3,16 @@ from langdetect import detect
 from googletrans import Translator
 from transformers import MBartForConditionalGeneration, MBartTokenizer
 @st.cache_data()
-def loadModel(sourceLanguage, targetLanguage):
+def loadModel():
     model_name = "facebook/mbart-large-50-one-to-many-mmt"
     tokenizer_name = "facebook/mbart-large-en-ro"
     model = MBartForConditionalGeneration.from_pretrained(model_name)
-    tokenizer = MBartTokenizer.from_pretrained(tokenizer_name, src_lang=sourceLanguage, tgt_lang=targetLanguage)
+    tokenizer = MBartTokenizer.from_pretrained(tokenizer_name, src_lang="en_XX")#sourceLanguage, tgt_lang=targetLanguage
     return model, tokenizer
 @st.cache_data()
-def translateModel(article_en, target_language,sourceLanguage):
+def translateModel(article_en, target_language):#sourceLanguage
     # detectedLang = detect(article_en) 
-    model, tokenizer = loadModel(sourceLanguage, target_language)
+    model, tokenizer = loadModel(target_language)
     model_inputs = tokenizer(article_en, return_tensors="pt")
     generated_tokens = model.generate(
         **model_inputs,
@@ -55,7 +55,7 @@ def main():
             st.write("Please enter text to translate.")
 
     article_en = st.text_area("Enter Text to Translate using Model")
-    source_language = st.selectbox("Select Source Language", ["en_XX","hi_IN","bn_IN","gu_IN","kn_IN","ml_IN","mr_IN","or_IN","pa_IN","ta_IN"])
+    # source_language = st.selectbox("Select Source Language", ["en_XX","hi_IN","bn_IN","gu_IN","kn_IN","ml_IN","mr_IN","or_IN","pa_IN","ta_IN"])
     target_language = st.selectbox("Select Target Language", ["en_XX","hi_IN","bn_IN","gu_IN","kn_IN","ml_IN","mr_IN","or_IN","pa_IN","ta_IN"])
     if st.button("Translate using Model"):
         if article_en:
