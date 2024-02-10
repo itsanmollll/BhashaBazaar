@@ -4,10 +4,11 @@ import pyaudio
 import streamlit as st
 from google.oauth2 import service_account
 from google.cloud import speech_v1p1beta1 as speech
+from google.cloud import texttospeech
 
 
 recordFiles =[]
-
+@st.cache_data()
 def deletePreviousAudio(filename):
     if os.path.exists(filename):
         os.remove(filename)
@@ -47,45 +48,63 @@ def recordAudio(filename, seconds=5):
         wf.writeframes(b"".join(frames))
     recordFiles.append(filename)
 
-
+@st.cache_data()
 def clearRecordedFiles():
     for filename in recordFiles:
         deletePreviousAudio(filename)
     recordFiles.clear()
 
+@st.cache_data()
+def generate_audio(text_block):
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/Users/anmol/Desktop/Work/basicPractice/bhashabazaar-b14fbe10ecd5.json'
+    client = texttospeech.TextToSpeechClient()
+    synthesis_input = texttospeech.SynthesisInput(text=text_block)
+
+    voice = texttospeech.VoiceSelectionParams(
+        language_code="en-IN",
+        name="en-IN-Wavenet-D",
+    )
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3,
+        effects_profile_id=["handset-class-device"],
+        speaking_rate=1.0,
+        pitch=1
+    )
+    response = client.synthesize_speech(
+        input=synthesis_input, voice=voice, audio_config=audio_config
+    )
+    return response.audio_content
 
 def main(): 
-    st.markdown(f"""
-            <style>
-                [class="main st-emotion-cache-uf99v8 ea3mdgi3"] {{
-                    backdrop-filter: blur(0px);
-                    background:linear-gradient(rgb(102 185 255 / 84%) 0px, rgb(255 141 207 / 53%)  100%);
-            
-            }}
-                [data-testid="stHeader"]{{
-                    background: rgba(0,0,0,0.3);
-                    backdrop-filter: blur(15px);
-                        color: white;
-                }}
-            </style>
-
-    """, unsafe_allow_html=True)
-        
     st.title("Voice 🗣")
     st.subheader("Record Your Voice and Transcribe it to Text")
     st.markdown("This feature allows you to record your voice and transcribe it to text. Click 'Record Audio' to start recording and 'Transcribe' to convert speech to text.")
     st.markdown("---")
-    language_code = st.selectbox("Select Language", ["en-US","hi-IN","bn-IN","gu-IN","kn-IN","ml-IN","mr-IN","or-IN","pa-IN","ta-IN"])
-    if st.button("#### 🎙 \n #### Record Audio"):
-        recordAudio(f"recorded_audio_{len(recordFiles)+1}.wav") #recordAudio("recorded_audio.wav")
-        st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
-    if st.button("Transcribe"):
-        audio = open("recorded_audio.wav", "rb").read()
-        text = transcribe(audio,language_code)
-        st.subheader("Transcribed Text 🖨")
-        st.text(' ')
-        st.markdown(f"**{text}**")
-
-
+    cols = st.columns([10,1,10])
+    with cols[0]:
+        st.title("Speech-to-Text")
+        st.subheader("Generate text from speach")
+        language_code = st.selectbox("Select Language", ["en-US","hi-IN","bn-IN","gu-IN","kn-IN","ml-IN","mr-IN","or-IN","pa-IN","ta-IN"])
+        if st.button("#### 🎙 \n #### Record Audio"):
+            recordAudio(f"recorded_audio.wav") #recordAudio("recorded_audio.wav")
+            st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
+        if st.button("Transcribe"):
+            audio = open("recorded_audio.wav", "rb").read()
+            text = transcribe(audio,language_code)
+            st.subheader("Transcribed Text 🖨")
+            st.text(' ')
+            st.markdown(f"**{text}**")
+            
+    with cols[2]:
+        st.title("Text-to-Speech")
+        st.subheader("Generate audio from text")
+        text_block = st.text_area("### Enter Text")
+        if st.button("Generate Audio"):
+            st.info("Generating audio...")
+            audio_content = generate_audio(text_block)
+            with open("audio.mp3", "wb") as output:
+                output.write(audio_content)
+                st.audio("audio.mp3", format="audio/mp3",start_time=0)
+                st.success('Audio content written to file "audio.mp3"') 
 if __name__ == '__main__':
     main()

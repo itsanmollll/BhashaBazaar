@@ -29,7 +29,7 @@ def translateText_Api(text, targetLang):
 
 def main():
     st.title("Indic Language  Text Translator")
-    st.markdown("Translate text from English to any Indic Language and vice-versa. You can either use Google Translate API or HuggingFace Model for translation.")
+    st.markdown("Translate text from English to any Indic Language and vice-versa. You can either use Translate API or MBart Model for translation.")
     st.markdown("---")
     languages = {
         "English": "en",
@@ -46,7 +46,7 @@ def main():
     }
     cols = st.columns([10,1,10])
     with cols[0]:
-        st.subheader("Using Google Translate API 🌐") 
+        st.subheader("Using API🌐") 
         targetLang = st.selectbox("Select Target Language", languages)
         text = st.text_area("Enter Text to Translate")
         if st.button("Translate"):
@@ -58,7 +58,7 @@ def main():
                 st.write("Please enter text to translate.")
 
     with cols[2]:
-        st.subheader("Using HuggingFace Model 🤗")
+        st.subheader("Using Model 🤗")
         target_language = st.selectbox("Select Target Language", ["en_XX","hi_IN","bn_IN","gu_IN","kn_IN","ml_IN","mr_IN","or_IN","pa_IN","ta_IN"])
         article_en = st.text_area("Enter Text to Translate using Model")
         if st.button("Translate using Model"):
