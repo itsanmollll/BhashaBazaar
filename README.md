@@ -90,7 +90,7 @@ BhashaBazaar is released under the [MIT License](https://opensource.org/licenses
 
 **Contact:**
 
-For inquiries, feedback, or support, please contact the BhashaBazaar development team at [email@example.com](mailto:email@example.com).
+For inquiries, feedback, or support, please contact the BhashaBazaar development team at [anmolbhardwajinv224](anmolbhardwajinv224+work@gmail.com).
 
 ---
 
