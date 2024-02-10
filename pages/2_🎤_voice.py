@@ -77,8 +77,8 @@ def generate_audio(text_block):
 
 def main(): 
     st.title("Voice 🗣")
-    st.subheader("Record Your Voice and Transcribe it to Text")
-    st.markdown("This feature allows you to record your voice and transcribe it to text. Click 'Record Audio' to start recording and 'Transcribe' to convert speech to text.")
+    st.subheader("Do Audio Related Work Here: ")
+    st.markdown("This page allows you to perform speech-to-text and text-to-speech operations. You can record audio and convert it to text, or enter text and convert it to audio.")
     st.markdown("---")
     cols = st.columns([10,1,10])
     with cols[0]:
@@ -86,7 +86,7 @@ def main():
         st.subheader("Generate text from speach")
         language_code = st.selectbox("Select Language", ["en-US","hi-IN","bn-IN","gu-IN","kn-IN","ml-IN","mr-IN","or-IN","pa-IN","ta-IN"])
         if st.button("#### 🎙 \n #### Record Audio"):
-            recordAudio(f"recorded_audio.wav") #recordAudio("recorded_audio.wav")
+            recordAudio(f"recorded_audio.wav") 
             st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
         if st.button("Transcribe"):
             audio = open("recorded_audio.wav", "rb").read()
@@ -104,7 +104,7 @@ def main():
             audio_content = generate_audio(text_block)
             with open("audio.mp3", "wb") as output:
                 output.write(audio_content)
-                st.audio("audio.mp3", format="audio/mp3",start_time=0)
-                st.success('Audio content written to file "audio.mp3"') 
+                st.audio("audio.mp3")
+            
 if __name__ == '__main__':
     main()

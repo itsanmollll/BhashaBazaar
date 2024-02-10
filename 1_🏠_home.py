@@ -1,6 +1,5 @@
 import streamlit as st
 st.set_page_config(page_title="BhashaBazaar", page_icon="🌐", layout="wide")
-# st.sidebar.success("Welcome to the Home page!")
 st.markdown("""<h1 id="title-h"><span data-id="s1" class="spans">BHASHA</span><span data-id="s2">-BAZAAR 🎙️:</span></h1><br><h2><span data-id="s3 style="font-size: smaller;>Your Gateway to Multilingual Communication</h2>""",
             unsafe_allow_html=True)
 
@@ -17,9 +16,7 @@ def main():
         3. **Consistent Performance**
         4. **Real-time Updates**
         5. **Scalability and Reliability**''')
-        # '''
-        # With the text translation feature, users can bridge language gaps and facilitate communication on a global scale. Whether for personal or professional use, this feature enhances accessibility and fosters collaboration across diverse linguistic backgrounds.
-        # '''
+    
 
     with col2:
         st.markdown("### 📝️Text Translation (Model)🕉")
@@ -31,8 +28,6 @@ def main():
         4. **Domain-specific Adaptation**
         5. **Offline Capabilities**
         ''')
-        # With the text translation feature powered by the mBart model, users can bridge language gaps and facilitate communication on a global scale. Whether for personal or professional use, this feature enhances accessibility and fosters collaboration across diverse linguistic backgrounds.
-        # ''')
 
     col3, col4 = st.columns(2)
     with col3:
@@ -56,8 +51,8 @@ def main():
         5. **Real-time Synthesis**
         ''')
 
-    st.text('');
-    st.text('');
+    st.text('')
+    st.text('')
     st.markdown('# Dependecies:')
 
     st.markdown('''
