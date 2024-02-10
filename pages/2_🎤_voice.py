@@ -1,4 +1,6 @@
 import os 
+import wave
+import pyaudio
 import streamlit as st
 from google.oauth2 import service_account
 from google.cloud import speech_v1p1beta1 as speech
@@ -27,24 +29,24 @@ def transcribe(audio,language_code):
     return response.results[0].alternatives[0].transcript
 
 @st.cache_data()
-# def recordAudio(filename, seconds=5):
-#     deletePreviousAudio(filename)
-#     chunk = 1024
-#     sample_format = pyaudio.paInt16
-#     channels = 1
-#     fs = 44100
-#     p = pyaudio.PyAudio()
-#     stream = p.open(format=sample_format, channels=channels, rate=fs, frames_per_buffer=chunk, input=True)
-#     frames = [stream.read(chunk) for _ in range(0, int(fs / chunk * seconds))]
-#     stream.stop_stream()
-#     stream.close()
-#     p.terminate()
-#     with wave.open(filename, "wb") as wf:
-#         wf.setnchannels(channels)
-#         wf.setsampwidth(p.get_sample_size(sample_format))
-#         wf.setframerate(fs)
-#         wf.writeframes(b"".join(frames))
-    # recordFiles.append(filename)
+def recordAudio(filename, seconds=5):
+    deletePreviousAudio(filename)
+    chunk = 1024
+    sample_format = pyaudio.paInt16
+    channels = 1
+    fs = 44100
+    p = pyaudio.PyAudio()
+    stream = p.open(format=sample_format, channels=channels, rate=fs, frames_per_buffer=chunk, input=True)
+    frames = [stream.read(chunk) for _ in range(0, int(fs / chunk * seconds))]
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    with wave.open(filename, "wb") as wf:
+        wf.setnchannels(channels)
+        wf.setsampwidth(p.get_sample_size(sample_format))
+        wf.setframerate(fs)
+        wf.writeframes(b"".join(frames))
+    recordFiles.append(filename)
 
 @st.cache_data()
 def clearRecordedFiles():
@@ -79,19 +81,19 @@ def main():
     st.markdown("This page allows you to perform speech-to-text and text-to-speech operations. You can record audio and convert it to text, or enter text and convert it to audio.")
     st.markdown("---")
     cols = st.columns([10,1,10])
-    # with cols[0]:
-    #     st.title("Speech-to-Text")
-    #     st.subheader("Generate text from speach")
-    #     language_code = st.selectbox("Select Language", ["en-US","hi-IN","bn-IN","gu-IN","kn-IN","ml-IN","mr-IN","or-IN","pa-IN","ta-IN"])
-    #     if st.button("#### 🎙 \n #### Record Audio"):
-    #         recordAudio(f"recorded_audio.wav") 
-    #         st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
-        # if st.button("Transcribe"):
-        #     audio = open("recorded_audio.wav", "rb").read()
-        #     text = transcribe(audio,language_code)
-        #     st.subheader("Transcribed Text 🖨")
-        #     st.text(' ')
-        #     st.markdown(f"**{text}**")
+    with cols[0]:
+        st.title("Speech-to-Text")
+        st.subheader("Generate text from speach")
+        language_code = st.selectbox("Select Language", ["en-US","hi-IN","bn-IN","gu-IN","kn-IN","ml-IN","mr-IN","or-IN","pa-IN","ta-IN"])
+        if st.button("#### 🎙 \n #### Record Audio"):
+            recordAudio(f"recorded_audio.wav") 
+            st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
+        if st.button("Transcribe"):
+            audio = open("recorded_audio.wav", "rb").read()
+            text = transcribe(audio,language_code)
+            st.subheader("Transcribed Text 🖨")
+            st.text(' ')
+            st.markdown(f"**{text}**")
             
     with cols[2]:
         st.title("Text-to-Speech")
