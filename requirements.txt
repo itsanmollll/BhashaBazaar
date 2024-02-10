@@ -1,4 +1,5 @@
 streamlit 
+pyaudio
 googletrans-py
 google-cloud-speech
 transformers 
