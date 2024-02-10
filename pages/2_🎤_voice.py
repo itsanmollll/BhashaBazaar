@@ -1,6 +1,4 @@
 import os 
-import wave 
-import pyaudio
 import streamlit as st
 from google.oauth2 import service_account
 from google.cloud import speech_v1p1beta1 as speech
