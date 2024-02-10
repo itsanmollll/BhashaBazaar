@@ -16,4 +16,4 @@ RUN /myenv/bin/pip install -r /app/requirements.txt
 ADD . /app
 
 # Set the entrypoint to run your Streamlit application
-ENTRYPOINT [ "/myenv/bin/streamlit", "run", "/app/1_🏠_home.py", "--server.port", "8080" ]
+ENTRYPOINT [ "/myenv/bin/streamlit", "run", "/app/home.py", "--server.port", "8080" ]

@@ -1,6 +1,6 @@
 streamlit 
 pyaudio
-googletrans-py
+googletrans
 google-cloud-speech
 transformers 
 sentencepiece
