@@ -28,24 +28,6 @@ def translateText_Api(text, targetLang):
     return translation.text
 
 def main():
-
-    # st.markdown(f"""
-    # <style>
-    #     [data-testid="block-container"] {{
-    #         backdrop-filter: blur(0px);
-    #         background: linear-gradient(rgb(255, 253, 128) 0px, rgb(119 193 255) 100%);
-    #         background-image: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366");
-    #         background-size: cover; 
-    #     }}
-    #     [data-testid="stHeader"]{{
-    #         background: rgba(0,0,0,0.3);
-    #         backdrop-filter: blur(15px);
-    #             color: white;
-    #     }}
-    # </style>
-
-    # """, unsafe_allow_html=True)
-
     st.title("Indic Language  Text Translator")
     st.markdown("Translate text from English to any Indic Language and vice-versa. You can either use Google Translate API or HuggingFace Model for translation.")
     st.markdown("---")
@@ -89,8 +71,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-# text2= st.text_area("Enter Text to Translate using Model")
-#     article_en = detect(text2)
-#

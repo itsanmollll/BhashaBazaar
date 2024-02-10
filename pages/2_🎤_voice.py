@@ -1,19 +1,27 @@
-import streamlit as st
+import os 
 import wave 
 import pyaudio
+import streamlit as st
 from google.oauth2 import service_account
 from google.cloud import speech_v1p1beta1 as speech
 
+
+recordFiles =[]
+
+def deletePreviousAudio(filename):
+    if os.path.exists(filename):
+        os.remove(filename)
+
 @st.cache_data()
-def transcribe(audio):
-    clientFile = '/Users/anmol/Desktop/Work/BhashaBazaar/bhashabazaar-b14fbe10ecd5.json'
+def transcribe(audio,language_code):
+    clientFile = '/Users/anmol/Desktop/Work/BhashaBazaar/bhashabazaar-b14fbe10ecd5.json' # Replace this with your own client file
     credentials = service_account.Credentials.from_service_account_file(clientFile)
     client = speech.SpeechClient(credentials=credentials)
     audio = speech.RecognitionAudio(content=audio)
     config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=44100, #range(8-something)
-        language_code="en-US",
+        language_code=language_code,
         enable_automatic_punctuation=True,
     )
     response = client.recognize(config=config, audio=audio)
@@ -21,6 +29,7 @@ def transcribe(audio):
 
 @st.cache_data()
 def recordAudio(filename, seconds=5):
+    deletePreviousAudio(filename)
     chunk = 1024
     sample_format = pyaudio.paInt16
     channels = 1
@@ -36,6 +45,14 @@ def recordAudio(filename, seconds=5):
         wf.setsampwidth(p.get_sample_size(sample_format))
         wf.setframerate(fs)
         wf.writeframes(b"".join(frames))
+    recordFiles.append(filename)
+
+
+def clearRecordedFiles():
+    for filename in recordFiles:
+        deletePreviousAudio(filename)
+    recordFiles.clear()
+
 
 def main(): 
     st.markdown(f"""
@@ -58,13 +75,13 @@ def main():
     st.subheader("Record Your Voice and Transcribe it to Text")
     st.markdown("This feature allows you to record your voice and transcribe it to text. Click 'Record Audio' to start recording and 'Transcribe' to convert speech to text.")
     st.markdown("---")
+    language_code = st.selectbox("Select Language", ["en-US","hi-IN","bn-IN","gu-IN","kn-IN","ml-IN","mr-IN","or-IN","pa-IN","ta-IN"])
     if st.button("#### 🎙 \n #### Record Audio"):
-        recordAudio("recorded_audio.wav")
+        recordAudio(f"recorded_audio_{len(recordFiles)+1}.wav") #recordAudio("recorded_audio.wav")
         st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
     if st.button("Transcribe"):
         audio = open("recorded_audio.wav", "rb").read()
-        text = transcribe(audio)
-
+        text = transcribe(audio,language_code)
         st.subheader("Transcribed Text 🖨")
         st.text(' ')
         st.markdown(f"**{text}**")
