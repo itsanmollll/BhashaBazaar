@@ -1,7 +1,7 @@
 streamlit 
 googletrans-py
 google-cloud-speech
-pyaudio
+PyAudio
 transformers 
 sentencepiece
 torch 
