@@ -2,7 +2,7 @@
 # brew install portaudio - Mac
 pydub
 streamlit 
-googletrans=4.0.0
+googletrans-py
 google-cloud-speech
 google-cloud-texttospeech
 transformers 
