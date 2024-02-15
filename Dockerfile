@@ -1,4 +1,4 @@
-
+FROM python:3.9
 # Create a virtual environment named myenv
 RUN virtualenv /myenv -p python3
 
