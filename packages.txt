@@ -1,2 +1,1 @@
-#!/bin/bash
 -y portaudio19-dev
