@@ -1,7 +1,10 @@
+# apt-get update && apt-get install -y portaudio19-dev - Linux
+# brew install portaudio - Mac
+pydub
 streamlit 
-pyaudio
-googletrans
+googletrans=4.0.0
 google-cloud-speech
+google-cloud-texttospeech
 transformers 
 sentencepiece
 torch 

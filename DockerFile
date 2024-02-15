@@ -1,4 +1,3 @@
-FROM gcr.io/google-appengine/python
 
 # Create a virtual environment named myenv
 RUN virtualenv /myenv -p python3

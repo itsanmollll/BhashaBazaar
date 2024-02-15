@@ -1,7 +1,7 @@
 import os 
 import wave
-import pyaudio
 import streamlit as st
+import pyaudio
 from google.oauth2 import service_account
 from google.cloud import speech_v1p1beta1 as speech
 from google.cloud import texttospeech
@@ -14,11 +14,11 @@ def deletePreviousAudio(filename):
         os.remove(filename)
 
 @st.cache_data()
-def transcribe(audio,language_code):
+def transcribe(audio_content,language_code):
     clientFile = '/Users/anmol/Desktop/Work/BhashaBazaar/bhashabazaar-b14fbe10ecd5.json' # Replace this with your own client file
     credentials = service_account.Credentials.from_service_account_file(clientFile)
     client = speech.SpeechClient(credentials=credentials)
-    audio = speech.RecognitionAudio(content=audio)
+    audio = speech.RecognitionAudio(content=audio_content)
     config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=44100, #range(8-something)
@@ -84,7 +84,18 @@ def main():
     with cols[0]:
         st.title("Speech-to-Text")
         st.subheader("Generate text from speach")
-        language_code = st.selectbox("Select Language", ["en-US","hi-IN","bn-IN","gu-IN","kn-IN","ml-IN","mr-IN","or-IN","pa-IN","ta-IN"])
+        # language_code = st.selectbox("Select Language", ["en-US","hi-IN","bn-IN","gu-IN","kn-IN","ml-IN","mr-IN","or-IN","pa-IN","ta-IN"])
+        uploaded_file = st.file_uploader("Upload Audio File", type=["wav"])
+        language_code = st.selectbox("Select Language", ["en-US", "hi-IN", "bn-IN", "gu-IN", "kn-IN", "ml-IN", "mr-IN", "or-IN", "pa-IN", "ta-IN"])
+        # if uploaded_file is not None:
+        #     # Read the uploaded audio file
+        #     audio_content = uploaded_file.read()
+        #     st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
+        # if st.button("Transcribe"):
+        #     text = transcribe(audio_content,language_code)
+        #     st.subheader("Transcribed Text 🖨")
+        #     st.text(' ')
+        #     st.markdown(f"**{text}**")
         if st.button("#### 🎙 \n #### Record Audio"):
             recordAudio(f"recorded_audio.wav") 
             st.info("Recording finished. Click 'Transcribe' to convert speech to text.")
