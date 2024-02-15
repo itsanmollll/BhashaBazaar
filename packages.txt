@@ -1,1 +1,3 @@
-apt-get update && apt-get install -y portaudio19-dev - Linux
+#!/bin/bash
+apt-get update
+apt-get install -y portaudio19-dev
