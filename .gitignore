@@ -1,4 +1,5 @@
 *.json
 *.wav
 *.mp3
-venv/
+venv
+.streamlit/
